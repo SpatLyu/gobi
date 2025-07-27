@@ -1,5 +1,5 @@
 Package: gobi
-Title: General ODE-based Causal Inference
+Title: General ODE-based Inference
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Wenbo", family = "Lv",
