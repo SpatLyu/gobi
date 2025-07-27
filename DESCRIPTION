@@ -1,5 +1,5 @@
 Package: gobi
-Title: General ODE-based Inference
+Title: General ODE-Based Inference
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Wenbo", family = "Lv",
