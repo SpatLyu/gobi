@@ -40,16 +40,18 @@ std::vector<std::vector<double>> gradient(
 );
 
 // Case 3a: Gradient of 1D data
+// h can be a scalar (uniform spacing) or a vector of coordinates.
 std::vector<double> gradient(
     const std::vector<double>& F,
-    double h = 1.0
+    const std::vector<double>& h
 );
 
 // Case 3b: Gradient of 2D data
+// hx, hy can be scalars (uniform spacing) or coordinate vectors.
 Gradient2D gradient(
     const std::vector<std::vector<double>>& F,
-    double hx = 1.0,
-    double hy = 1.0
+    const std::vector<double>& hx,
+    const std::vector<double>& hy
 );
 
 #endif // GRADIENT_H
