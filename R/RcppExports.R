@@ -2,18 +2,18 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 gradient_scalar <- function(f, x0, h = 0) {
-    .Call('_gobi_gradient_scalar', PACKAGE = 'gobi', f, x0, h)
+    .Call(`_gobi_gradient_scalar`, f, x0, h)
 }
 
 jacobian_vector <- function(F, x0, h = 0) {
-    .Call('_gobi_jacobian_vector', PACKAGE = 'gobi', F, x0, h)
+    .Call(`_gobi_jacobian_vector`, F, x0, h)
 }
 
-gradient_1d <- function(F, h = 1.0) {
-    .Call('_gobi_gradient_1d', PACKAGE = 'gobi', F, h)
+gradient_1d <- function(F, h = as.numeric( c(1.0))) {
+    .Call(`_gobi_gradient_1d`, F, h)
 }
 
-gradient_2d <- function(F, hx = 1.0, hy = 1.0) {
-    .Call('_gobi_gradient_2d', PACKAGE = 'gobi', F, hx, hy)
+gradient_2d <- function(F, hx = as.numeric( c(1.0)), hy = as.numeric( c(1.0))) {
+    .Call(`_gobi_gradient_2d`, F, hx, hy)
 }
 

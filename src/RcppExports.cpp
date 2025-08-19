@@ -36,24 +36,24 @@ BEGIN_RCPP
 END_RCPP
 }
 // gradient_1d
-Rcpp::NumericVector gradient_1d(Rcpp::NumericVector F, double h);
+Rcpp::NumericVector gradient_1d(Rcpp::NumericVector F, Rcpp::NumericVector h);
 RcppExport SEXP _gobi_gradient_1d(SEXP FSEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< double >::type h(hSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type h(hSEXP);
     rcpp_result_gen = Rcpp::wrap(gradient_1d(F, h));
     return rcpp_result_gen;
 END_RCPP
 }
 // gradient_2d
-Rcpp::List gradient_2d(Rcpp::NumericMatrix F, double hx, double hy);
+Rcpp::List gradient_2d(Rcpp::NumericMatrix F, Rcpp::NumericVector hx, Rcpp::NumericVector hy);
 RcppExport SEXP _gobi_gradient_2d(SEXP FSEXP, SEXP hxSEXP, SEXP hySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type F(FSEXP);
-    Rcpp::traits::input_parameter< double >::type hx(hxSEXP);
-    Rcpp::traits::input_parameter< double >::type hy(hySEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type hx(hxSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type hy(hySEXP);
     rcpp_result_gen = Rcpp::wrap(gradient_2d(F, hx, hy));
     return rcpp_result_gen;
 END_RCPP
