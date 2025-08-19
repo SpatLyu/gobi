@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include "gradient.h"
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 Rcpp::NumericVector gradient_scalar(Rcpp::Function f, Rcpp::NumericVector x0, double h = 0) {
   std::vector<double> x(x0.begin(), x0.end());
 
@@ -16,7 +16,7 @@ Rcpp::NumericVector gradient_scalar(Rcpp::Function f, Rcpp::NumericVector x0, do
   return Rcpp::wrap(g);
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 Rcpp::NumericMatrix jacobian_vector(Rcpp::Function F, Rcpp::NumericVector x0, double h = 0) {
   std::vector<double> x(x0.begin(), x0.end());
 
@@ -37,33 +37,35 @@ Rcpp::NumericMatrix jacobian_vector(Rcpp::Function F, Rcpp::NumericVector x0, do
   return out;
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 Rcpp::NumericVector gradient_1d(Rcpp::NumericVector F, double h = 1.0) {
   std::vector<double> f(F.begin(), F.end());
   std::vector<double> g = gradient(f, h);
   return Rcpp::wrap(g);
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 Rcpp::List gradient_2d(Rcpp::NumericMatrix F, double hx = 1.0, double hy = 1.0) {
   size_t n = F.nrow(), m = F.ncol();
   std::vector<std::vector<double>> f(n, std::vector<double>(m));
-  for (size_t i = 0; i < n; i++)
-    for (size_t j = 0; j < m; j++)
+  for (size_t i = 0; i < n; i++) {
+    for (size_t j = 0; j < m; j++) {
       f[i][j] = F(i,j);
+    }
+  }
 
   Gradient2D G = gradient(f, hx, hy);
 
   Rcpp::NumericMatrix dX(n, m), dY(n, m);
-  for (size_t i = 0; i < n; i++)
+  for (size_t i = 0; i < n; i++) {
     for (size_t j = 0; j < m; j++) {
       dX(i,j) = G.dX[i][j];
       dY(i,j) = G.dY[i][j];
     }
+  }
 
-    return Rcpp::List::create(
-      Rcpp::Named("X") = dX,
-      Rcpp::Named("Y") = dY
-    );
+  return Rcpp::List::create(
+    Rcpp::Named("X") = dX,
+    Rcpp::Named("Y") = dY
+  );
 }
-
