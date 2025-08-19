@@ -15,3 +15,6 @@ URL: https://stscl.github.io/gobi/, https://github.com/stscl/gobi
 BugReports: https://github.com/stscl/gobi/issues
 Depends: 
     R (>= 4.1.0)
+LinkingTo: 
+    Rcpp,
+    RcppThread
