@@ -2,7 +2,7 @@
 #include "gradient.h"
 
 // [[Rcpp::export(rng = false)]]
-Rcpp::NumericVector gradient_scalar(Rcpp::Function f,
+Rcpp::NumericVector gradient_cont1d(Rcpp::Function f,
                                     Rcpp::NumericVector x0,
                                     double h = 0) {
   std::vector<double> x(x0.begin(), x0.end());
@@ -19,7 +19,7 @@ Rcpp::NumericVector gradient_scalar(Rcpp::Function f,
 }
 
 // [[Rcpp::export(rng = false)]]
-Rcpp::NumericMatrix jacobian_vector(Rcpp::Function F,
+Rcpp::NumericMatrix gradient_cont2d(Rcpp::Function F,
                                     Rcpp::NumericVector x0,
                                     double h = 0) {
   std::vector<double> x(x0.begin(), x0.end());
@@ -42,8 +42,8 @@ Rcpp::NumericMatrix jacobian_vector(Rcpp::Function F,
 }
 
 // [[Rcpp::export(rng = false)]]
-Rcpp::NumericVector gradient_1d(Rcpp::NumericVector F,
-                                Rcpp::NumericVector h = Rcpp::NumericVector::create(1.0)) {
+Rcpp::NumericVector gradient_disc1d(Rcpp::NumericVector F,
+                                    Rcpp::NumericVector h = Rcpp::NumericVector::create(1.0)) {
   std::vector<double> f(F.begin(), F.end());
   std::vector<double> h_std(h.begin(), h.end());
   std::vector<double> g = gradient(f, h_std);
@@ -51,9 +51,9 @@ Rcpp::NumericVector gradient_1d(Rcpp::NumericVector F,
 }
 
 // [[Rcpp::export(rng = false)]]
-Rcpp::List gradient_2d(Rcpp::NumericMatrix F,
-                       Rcpp::NumericVector hx = Rcpp::NumericVector::create(1.0),
-                       Rcpp::NumericVector hy = Rcpp::NumericVector::create(1.0)) {
+Rcpp::List gradient_disc2d(Rcpp::NumericMatrix F,
+                           Rcpp::NumericVector hx = Rcpp::NumericVector::create(1.0),
+                           Rcpp::NumericVector hy = Rcpp::NumericVector::create(1.0)) {
   size_t n = F.nrow(), m = F.ncol();
   std::vector<std::vector<double>> f(n, std::vector<double>(m));
   for (size_t i = 0; i < n; i++) {
