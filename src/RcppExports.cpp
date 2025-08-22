@@ -11,59 +11,59 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// gradient_scalar
-Rcpp::NumericVector gradient_scalar(Rcpp::Function f, Rcpp::NumericVector x0, double h);
-RcppExport SEXP _gobi_gradient_scalar(SEXP fSEXP, SEXP x0SEXP, SEXP hSEXP) {
+// gradient_cont1d
+Rcpp::NumericVector gradient_cont1d(Rcpp::Function f, Rcpp::NumericVector x0, double h);
+RcppExport SEXP _gobi_gradient_cont1d(SEXP fSEXP, SEXP x0SEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::Function >::type f(fSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x0(x0SEXP);
     Rcpp::traits::input_parameter< double >::type h(hSEXP);
-    rcpp_result_gen = Rcpp::wrap(gradient_scalar(f, x0, h));
+    rcpp_result_gen = Rcpp::wrap(gradient_cont1d(f, x0, h));
     return rcpp_result_gen;
 END_RCPP
 }
-// jacobian_vector
-Rcpp::NumericMatrix jacobian_vector(Rcpp::Function F, Rcpp::NumericVector x0, double h);
-RcppExport SEXP _gobi_jacobian_vector(SEXP FSEXP, SEXP x0SEXP, SEXP hSEXP) {
+// gradient_cont2d
+Rcpp::NumericMatrix gradient_cont2d(Rcpp::Function F, Rcpp::NumericVector x0, double h);
+RcppExport SEXP _gobi_gradient_cont2d(SEXP FSEXP, SEXP x0SEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::Function >::type F(FSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x0(x0SEXP);
     Rcpp::traits::input_parameter< double >::type h(hSEXP);
-    rcpp_result_gen = Rcpp::wrap(jacobian_vector(F, x0, h));
+    rcpp_result_gen = Rcpp::wrap(gradient_cont2d(F, x0, h));
     return rcpp_result_gen;
 END_RCPP
 }
-// gradient_1d
-Rcpp::NumericVector gradient_1d(Rcpp::NumericVector F, Rcpp::NumericVector h);
-RcppExport SEXP _gobi_gradient_1d(SEXP FSEXP, SEXP hSEXP) {
+// gradient_disc1d
+Rcpp::NumericVector gradient_disc1d(Rcpp::NumericVector F, Rcpp::NumericVector h);
+RcppExport SEXP _gobi_gradient_disc1d(SEXP FSEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type F(FSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type h(hSEXP);
-    rcpp_result_gen = Rcpp::wrap(gradient_1d(F, h));
+    rcpp_result_gen = Rcpp::wrap(gradient_disc1d(F, h));
     return rcpp_result_gen;
 END_RCPP
 }
-// gradient_2d
-Rcpp::List gradient_2d(Rcpp::NumericMatrix F, Rcpp::NumericVector hx, Rcpp::NumericVector hy);
-RcppExport SEXP _gobi_gradient_2d(SEXP FSEXP, SEXP hxSEXP, SEXP hySEXP) {
+// gradient_disc2d
+Rcpp::List gradient_disc2d(Rcpp::NumericMatrix F, Rcpp::NumericVector hx, Rcpp::NumericVector hy);
+RcppExport SEXP _gobi_gradient_disc2d(SEXP FSEXP, SEXP hxSEXP, SEXP hySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type F(FSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type hx(hxSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type hy(hySEXP);
-    rcpp_result_gen = Rcpp::wrap(gradient_2d(F, hx, hy));
+    rcpp_result_gen = Rcpp::wrap(gradient_disc2d(F, hx, hy));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_gobi_gradient_scalar", (DL_FUNC) &_gobi_gradient_scalar, 3},
-    {"_gobi_jacobian_vector", (DL_FUNC) &_gobi_jacobian_vector, 3},
-    {"_gobi_gradient_1d", (DL_FUNC) &_gobi_gradient_1d, 2},
-    {"_gobi_gradient_2d", (DL_FUNC) &_gobi_gradient_2d, 3},
+    {"_gobi_gradient_cont1d", (DL_FUNC) &_gobi_gradient_cont1d, 3},
+    {"_gobi_gradient_cont2d", (DL_FUNC) &_gobi_gradient_cont2d, 3},
+    {"_gobi_gradient_disc1d", (DL_FUNC) &_gobi_gradient_disc1d, 2},
+    {"_gobi_gradient_disc2d", (DL_FUNC) &_gobi_gradient_disc2d, 3},
     {NULL, NULL, 0}
 };
 
